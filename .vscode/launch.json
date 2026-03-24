@@ -1,0 +1,47 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Evaluate Agent (Bank)",
+            "type": "python",
+            "request": "launch",
+            "module": "main.evaluate",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-p", "rca/archive/agent-Bank.csv",
+                "-q", "dataset/Bank/query.csv",
+                "-r", "test/agent_claude.csv"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Run Agent Standard",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/rca/run_agent_standard.py",
+            "args": [
+                "--dataset",
+                "Bank"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Run Sampling Balanced",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/rca/run_sampling_balanced.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Run Sampling Oracle",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/rca/run_sampling_oracle.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

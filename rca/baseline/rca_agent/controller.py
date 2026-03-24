@@ -81,6 +81,7 @@ def control_loop(objective:str, plan:str, ap, bp, logger, max_step = 15, max_tur
         
         note = [{'role': 'user', 'content': f"Continue your reasoning process for the target issue:\n\n{objective}\n\nFollow the rules during issue solving:\n\n{ap.rules}.\n\nResponse format:\n\n{format}"}]
         attempt_actor = []
+        response_raw = ""
         try:
             response_raw = get_chat_completion(
                 messages=prompt + note,
@@ -126,7 +127,8 @@ def control_loop(objective:str, plan:str, ap, bp, logger, max_step = 15, max_tur
 
         except Exception as e:
             logger.error(e)
-            prompt.append({'role': 'assistant', 'content': response_raw})
+            if response_raw:
+                prompt.append({'role': 'assistant', 'content': response_raw})
             prompt.append({'role': 'user', 'content': f"{str(e)}\nPlease provide your analysis in requested JSON format."})
             if 'context_length_exceeded' in str(e):
                 logger.warning("Token length exceeds the limit.")
